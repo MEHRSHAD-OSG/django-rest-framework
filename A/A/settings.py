@@ -151,8 +151,7 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'Blog',
     'DESCRIPTION': 'for front-end',
     'VERSION': '1.0.0',
-    # 'SERVE_INCLUDE_SCHEMA': False,
-    # OTHER SETTINGS
+
 }
 # from datetime import timedelta
 # SIMPLE_JWT = {
