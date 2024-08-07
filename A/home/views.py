@@ -9,20 +9,6 @@ from permissions import IsOwnerOrReadOnly
 # Create your views here.
 
 
-# class Home(APIView):
-#     permission_classes = [IsAuthenticatedOrReadOnly]
-#     def get(self, req):
-#         # get params with GET method
-#         # name = req.query_params["name"]
-#
-#         persons = models.Person.objects.all()
-#         # if send many arg to ser must many=True
-#         # when info read from db we must put in instance
-#         # instance just for get method
-#         ser_data = PersonSerializer(instance=persons , many=True)
-#         # ser_data.data = return value of PersonSerializer class
-#         return Response(data=ser_data.data)
-
 class QuestionView(APIView):
     authentication_classes = [TokenAuthentication]
     serializer_class = QuestionSerializer
@@ -48,9 +34,7 @@ class QuestionUpdateView(APIView):
     serializer_class = QuestionSerializer
     def put(self, request, pk):
         question = models.Question.objects.get(pk=pk)
-        # for check to sure use permissions
         self.check_object_permissions(request,question)
-        # اطلاعات data روی instance اعمال میشه و partials برای وقتی ک فقط یک فیلد را عوض میکنیم
         ser_data = QuestionSerializer(instance=question, data=request.POST, partial=True)
         if ser_data.is_valid():
             ser_data.save()
