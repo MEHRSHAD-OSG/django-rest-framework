@@ -19,7 +19,6 @@ from permissions import IsOwnerOrReadOnly
 class UserRegister(APIView):
     serializer_class = serializers.UserRegisterSerializer
     def post(self,req):
-        # when info send to me from client must validator because of put in data
         ser_data = serializers.UserRegisterSerializer(data=req.POST)
         if ser_data.is_valid():
             User.objects.create_user(
@@ -27,8 +26,6 @@ class UserRegister(APIView):
                 email=ser_data.validated_data['email'],
                 password=ser_data.validated_data['password'],
             )
-            # for user in User.objects.all():
-            #     Token.objects.get_or_create(user=user)
             return Response("register successful")
         return Response(ser_data.errors)
 
@@ -38,10 +35,7 @@ class UserLogout(APIView):
         request.user.auth_token.delete()
         logout(request)
         return Response('logged out')
-"""
-    viewsets = when we have large api and we want urls coordinated
-    and when we dont have very big code
-"""
+
 
 class UserViewSet(viewsets.ViewSet):
 
@@ -99,7 +93,3 @@ class ProfileCreateView(APIView):
         return Response(ser_data.errors)
 
 
-    # def retrieve(self,request,pk=None):
-    #     prof = get_object_or_404(self.queryset,pk=pk)
-    #     ser_data = serializers.ProfileViewSetSerializer(instance=prof).data
-    #     return Response(ser_data)
