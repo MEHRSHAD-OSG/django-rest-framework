@@ -9,11 +9,9 @@ class Question(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
     body = models.TextField()
-    # image = models.ImageField(upload_to='media',blank=True,null=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        # first 20
         return self.body[:20]
 
 
